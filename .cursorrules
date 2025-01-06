@@ -1,0 +1,5 @@
+# Rules
+Apply the following rules to the codebase
+
+## Type expression rules
+- Do not use call expressions for type annotations. Instead, use the type annotation directly.
