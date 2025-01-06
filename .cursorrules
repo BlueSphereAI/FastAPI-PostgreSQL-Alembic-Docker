@@ -14,4 +14,5 @@ Apply the following rules to the codebase
 
 ## Database rules
 - Create a new directory for each database model in app/database directory with __init__.py, model.py and service.py.
-- New model should be derived from BaseModel and new service should be derived from BaseService.
+- New model should be derived from BaseModel and new service should be derived from BaseService. Never miss table=True at the model class definition.
+- After every change in database, update __init__.py file in app/database directory to include all the models except for the base model.
