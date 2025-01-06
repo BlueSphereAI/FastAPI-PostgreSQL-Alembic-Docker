@@ -8,7 +8,7 @@ settings = get_settings()
 
 db_engine = create_async_engine(settings.PG_DATABASE_URL, future=True)
 
-async def get_db_session() -> AsyncGenerator:
+async def get_session() -> AsyncGenerator:
     async_session = async_sessionmaker(
         db_engine, class_=AsyncSession, expire_on_commit=False
     )

@@ -1,5 +1,17 @@
 # Rules
 Apply the following rules to the codebase
 
+## Module installation rules
+- Insall necessary python modules for generated code on your own using poetry instead of pip.
+- Especially for EmailStr, install pydantic[email].
+
 ## Type expression rules
 - Do not use call expressions for type annotations. Instead, use the type annotation directly.
+
+## Import rules
+- Do not use relative imports. Instead, use absolute imports.
+- Import necessary python modules for generated code.
+
+## Database rules
+- Create a new directory for each database model in app/database directory with __init__.py, model.py and service.py.
+- New model should be derived from BaseModel and new service should be derived from BaseService.
