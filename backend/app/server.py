@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.v1.users import router as user_router
 from app.api.v1.procedures import router as procedure_router
+from app.api.v1.facilities import router as facility_router
 
 # Create the FastAPI app
 app = FastAPI(title="MediGlobal Connect API")
@@ -19,6 +20,7 @@ app.add_middleware(
 # Include routers
 app.include_router(user_router, prefix="/api/v1")
 app.include_router(procedure_router, prefix="/api/v1")
+app.include_router(facility_router, prefix="/api/v1")
 
 # Index route
 @app.get("/")
