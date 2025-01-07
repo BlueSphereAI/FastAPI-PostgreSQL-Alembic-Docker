@@ -1,3 +1,4 @@
+root
 ├── backend  
 │   ├── alembic                # Directory for database migrations using Alembic  
 │   │   ├── env.py             # Alembic configuration environment script  
