@@ -38,3 +38,6 @@ root
 ├── ReadME.md                  # Main project documentation, providing setup and usage instructions  
 └── requirements  
     └── details.md             # Detailed information about project requirements or dependencies
+
+!Important:
+- app directory must be in the backend directory.
