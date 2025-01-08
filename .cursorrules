@@ -11,8 +11,9 @@ Apply the following rules to the codebase
 ## Import rules
 - Do not use relative imports. Instead, use absolute imports.
 - Import necessary python modules for generated code.
+- Import db dependencies from app.dependencies.database instead of app.dependencies.db.
 
 ## Database rules
 - Create a new directory for each database model in app/database directory with __init__.py, model.py and service.py.
 - New model should be derived from BaseModel and new service should be derived from BaseService. Never miss table=True at the model class definition.
-- After every change in database, update __init__.py file in app/database directory to include all the models except for the base model. Then, execute "make initialMigration" to create the initial migration. After that, execute "make applyMigration" to apply the migration on your own.
+- After every change in database, update __init__.py file in app/database directory to include all the models except for the base model. Then, execute "make initialMigration" to create the initial migration. After that, execute "make applyMigration" to apply the migration on your own. Before executing these commands, make sure to be in the backend directory.
