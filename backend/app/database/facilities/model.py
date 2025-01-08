@@ -25,4 +25,5 @@ class Facility(BaseModel, TimeStampMixin, table=True):
     patient_reviews: str
 
     # Relationships
-    price_comparisons: List["PriceComparison"] = Relationship(back_populates="facility") 
+    price_comparisons: List["PriceComparison"] = Relationship(back_populates="facility")
+    bookings: List["Booking"] = Relationship(back_populates="facility") 

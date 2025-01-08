@@ -19,4 +19,5 @@ class Procedure(BaseModel, TimeStampMixin, table=True):
     description: str
 
     # Relationships
-    price_comparisons: List["PriceComparison"] = Relationship(back_populates="procedure") 
+    price_comparisons: List["PriceComparison"] = Relationship(back_populates="procedure")
+    bookings: List["Booking"] = Relationship(back_populates="procedure") 
