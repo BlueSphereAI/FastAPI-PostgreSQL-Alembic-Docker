@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.v1.procedures import router as procedures_router
 from app.api.v1.facilities import router as facilities_router
+from app.api.v1.price_comparisons import router as price_comparisons_router
 
 # Create the FastAPI app
 app = FastAPI(title="MediGlobal Connect API")
@@ -19,6 +20,7 @@ app.add_middleware(
 # Include routers
 app.include_router(procedures_router, prefix="/api")
 app.include_router(facilities_router, prefix="/api")
+app.include_router(price_comparisons_router, prefix="/api")
 
 # Index route
 @app.get("/")

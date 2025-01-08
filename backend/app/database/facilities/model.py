@@ -1,7 +1,7 @@
-from typing import Optional
+from typing import Optional, List
 from uuid import UUID
 
-from sqlmodel import Field
+from sqlmodel import Field, Relationship
 
 from app.database.base.model import BaseModel, TimeStampMixin
 
@@ -22,4 +22,7 @@ class Facility(BaseModel, TimeStampMixin, table=True):
     location: str = Field(index=True)
     certifications: str
     doctor_info: str
-    patient_reviews: str 
+    patient_reviews: str
+
+    # Relationships
+    price_comparisons: List["PriceComparison"] = Relationship(back_populates="facility") 

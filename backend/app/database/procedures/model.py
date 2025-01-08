@@ -1,7 +1,7 @@
-from typing import Optional
+from typing import Optional, List
 from uuid import UUID
 
-from sqlmodel import Field
+from sqlmodel import Field, Relationship
 
 from app.database.base.model import BaseModel, TimeStampMixin
 
@@ -16,4 +16,7 @@ class Procedure(BaseModel, TimeStampMixin, table=True):
     """
     
     name: str = Field(index=True)
-    description: str 
+    description: str
+
+    # Relationships
+    price_comparisons: List["PriceComparison"] = Relationship(back_populates="procedure") 
