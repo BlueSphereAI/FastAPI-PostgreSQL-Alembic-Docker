@@ -28,7 +28,7 @@ Ensure the project structure follows the specifications outlined in `requirement
 ---
 
 ### **3 API Implementation Rule**  
-- Referencing `requirements/details.md`` and `requirements/project-structure.md`, implement each API group name in details.md with complete endpoint code, including actual database interaction logic, and configure router settings with the server **without user authentication**. 
+- Referencing `requirements/details.md` and `requirements/project-structure.md`, implement each API group name in details.md with complete endpoint code, including actual database interaction logic, and configure router settings with the server **without user authentication**. 
 
 
 ---
