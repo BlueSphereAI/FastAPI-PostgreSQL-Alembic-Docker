@@ -40,7 +40,7 @@ Apply the following rules to the codebase
 - After every change in database, update __init__.py file in app/database directory to include all the models except for the base model.
 - Do not execute any database commands or attempt to connect to the database.
 - Do not run Alembic commands. 
-- Use `.env.local` for the database connection URL, but do not connect to the database now. The DB string is for reference only, indicating where the database is located and where to connect in the future.  
+- Use `backend/.env.local` for the database connection URL, but do not connect to the database now. The DB string is for reference only, indicating where the database is located and where to connect in the future.  
 
 ## General Restrictions
 - Do not run the project.
