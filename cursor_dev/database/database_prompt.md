@@ -26,7 +26,9 @@ Before proceeding with database setup and modifications, review the following fi
 - If the database already exists:  
   - Create a **new database**.  
   - Update all source code files where database connection details are used.  
-  - Modify the database name in `docker-compose.local.yml` accordingly.  
+  - Modify the database name in `docker-compose.local.yml` accordingly. 
+-  For configurations such as database and Python environment packages, refer to the configuration files inside the backend directory, including alembic.ini and pyproject.toml.
+- Use the virtual environment located in the backend directory by running source backend/.venv/bin/activate 
 
 #### **b. Apply Database Migrations**  
 - The project uses **Alembic** for database migrations.  
