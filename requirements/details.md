@@ -1,407 +1,198 @@
-# Backend Detailed Requirements Documentation
+# Backend Detailed Requirements
+
+## Overview
+This document outlines the backend requirements for the AI-Driven Drug Repurposing Platform, detailing all necessary APIs, models, schemas, CRUD operations, services, and utilities to support the platform's core functionalities as described in the project overview and frontend detailed requirements.
 
 ## API Endpoints
 
-This section provides detailed documentation for the REST API endpoints required for each database model excluding user authentication.
+### 1. Authentication API
+**Path:** `/api/auth/login`  
+**Method:** `POST`  
+**Description:** Authenticates a user and returns a JWT token upon successful login.  
 
-### Procedures API
+#### Request Body Parameters:
+- `username`: `string` (required) - The user's username.
+- `password`: `string` (required) - The user's password.
 
-1. **Get All Procedures**
-   - **Endpoint**: `/api/procedures`
-   - **Method**: `GET`
-   - **Description**: Retrieves a list of all medical procedures available for comparison.
-   - **Response**:
-     ```json
-     [
-       {
-         "procedure_id": 1,
-         "name": "Knee Replacement",
-         "description": "Procedure details..."
-       },
-       ...
-     ]
-     ```
+#### Response Body:
+- `access_token`: `string` - JWT token for the authenticated user.
+- `token_type`: `string` - The type of token provided (e.g., "bearer").
 
-2. **Get Procedure by ID**
-   - **Endpoint**: `/api/procedures/{procedure_id}`
-   - **Method**: `GET`
-   - **Parameters**: `procedure_id` (path) - ID of the procedure
-   - **Description**: Retrieves details of a specific procedure by its ID.
-   - **Response**:
-     ```json
-     {
-       "procedure_id": 1,
-       "name": "Knee Replacement",
-       "description": "Procedure details..."
-     }
-     ```
+#### Exceptions:
+- `401 Unauthorized` if the credentials are invalid.
 
-3. **Add New Procedure**
-   - **Endpoint**: `/api/procedures`
-   - **Method**: `POST`
-   - **Request Body**:
-     ```json
-     {
-       "name": "Hip Replacement",
-       "description": "Procedure details..."
-     }
-     ```
-   - **Description**: Adds a new medical procedure to the database.
-   - **Response**:
-     ```json
-     {
-       "procedure_id": 2,
-       "name": "Hip Replacement",
-       "description": "Procedure details..."
-     }
-     ```
+---
 
-4. **Update Procedure**
-   - **Endpoint**: `/api/procedures/{procedure_id}`
-   - **Method**: `PUT`
-   - **Parameters**: `procedure_id` (path) - ID of the procedure
-   - **Request Body**:
-     ```json
-     {
-       "name": "Updated Procedure Name",
-       "description": "Updated description..."
-     }
-     ```
-   - **Description**: Updates the details of an existing medical procedure.
-   - **Response**:
-     ```json
-     {
-       "procedure_id": 2,
-       "name": "Updated Procedure Name",
-       "description": "Updated description..."
-     }
-     ```
+### 2. Compound Management API
+**Path:** `/api/compounds/upload`  
+**Method:** `POST`  
+**Description:** Allows the user to upload compound data.  
 
-5. **Delete Procedure**
-   - **Endpoint**: `/api/procedures/{procedure_id}`
-   - **Method**: `DELETE`
-   - **Parameters**: `procedure_id` (path) - ID of the procedure
-   - **Description**: Deletes a medical procedure from the database.
-   - **Response**: `204 No Content`
+#### Request Body Parameters:
+- `chemical_structure`: `string` (required) - Chemical structure or SMILES notation.
 
-### Facilities API
+#### Response Body:
+- `message`: `string` - Confirmation message regarding successful upload.
+- `compound_id`: `UUID` - The unique identifier for the uploaded compound.
 
-1. **Get All Facilities**
-   - **Endpoint**: `/api/facilities`
-   - **Method**: `GET`
-   - **Description**: Retrieves a list of all medical facilities.
-   - **Response**:
-     ```json
-     [
-       {
-         "facility_id": 1,
-         "name": "Global Health Center",
-         "location": "Mexico",
-         "certifications": "Certified details...",
-         "doctor_info": "Doctor details...",
-         "patient_reviews": "Review details..."
-       },
-       ...
-     ]
-     ```
+#### Exceptions:
+- `400 Bad Request` if the compound data is improperly structured.
 
-2. **Get Facility by ID**
-   - **Endpoint**: `/api/facilities/{facility_id}`
-   - **Method**: `GET`
-   - **Parameters**: `facility_id` (path) - ID of the facility
-   - **Description**: Retrieves details of a specific medical facility by its ID.
-   - **Response**:
-     ```json
-     {
-       "facility_id": 1,
-       "name": "Global Health Center",
-       "location": "Mexico",
-       "certifications": "Certified details...",
-       "doctor_info": "Doctor details...",
-       "patient_reviews": "Review details..."
-     }
-     ```
+**Path:** `/api/compounds/{compound_id}`  
+**Method:** `GET`  
+**Description:** Retrieves compound details including binding affinity and repurposing suggestions.  
 
-3. **Add New Facility**
-   - **Endpoint**: `/api/facilities`
-   - **Method**: `POST`
-   - **Request Body**:
-     ```json
-     {
-       "name": "New Health Facility",
-       "location": "India",
-       "certifications": "Certified details...",
-       "doctor_info": "Doctor details...",
-       "patient_reviews": "Review details..."
-     }
-     ```
-   - **Description**: Adds a new medical facility to the database.
-   - **Response**:
-     ```json
-     {
-       "facility_id": 2,
-       "name": "New Health Facility",
-       "location": "India",
-       "certifications": "Certified details...",
-       "doctor_info": "Doctor details...",
-       "patient_reviews": "Review details..."
-     }
-     ```
+#### Path Parameters:
+- `compound_id`: `UUID` - The unique identifier of the compound.
 
-4. **Update Facility**
-   - **Endpoint**: `/api/facilities/{facility_id}`
-   - **Method**: `PUT`
-   - **Parameters**: `facility_id` (path) - ID of the facility
-   - **Request Body**:
-     ```json
-     {
-       "name": "Updated Health Facility",
-       "location": "Updated location",
-       "certifications": "Updated certified details...",
-       "doctor_info": "Updated doctor details...",
-       "patient_reviews": "Updated review details..."
-     }
-     ```
-   - **Description**: Updates the details of an existing medical facility.
-   - **Response**:
-     ```json
-     {
-       "facility_id": 2,
-       "name": "Updated Health Facility",
-       "location": "Updated location",
-       "certifications": "Updated certified details...",
-       "doctor_info": "Updated doctor details...",
-       "patient_reviews": "Updated review details..."
-     }
-     ```
+#### Response Body:
+- `compound`: `object` - Detailed information about the compound including simulations and suggestions.
 
-5. **Delete Facility**
-   - **Endpoint**: `/api/facilities/{facility_id}`
-   - **Method**: `DELETE`
-   - **Parameters**: `facility_id` (path) - ID of the facility
-   - **Description**: Deletes a medical facility from the database.
-   - **Response**: `204 No Content`
+#### Exceptions:
+- `404 Not Found` if the compound does not exist.
 
-### PriceComparisons API
+---
 
-1. **Get All Price Comparisons**
-   - **Endpoint**: `/api/price_comparisons`
-   - **Method**: `GET`
-   - **Description**: Retrieves all price comparisons between facilities.
-   - **Response**:
-     ```json
-     [
-       {
-         "comparison_id": 1,
-         "procedure_id": 1,
-         "facility_id": 1,
-         "country_id": 2,
-         "us_price": 20000,
-         "international_price": 8000,
-         "travel_cost": 1500
-       },
-       ...
-     ]
-     ```
+### 3. Simulation API
+**Path:** `/api/simulations/start`  
+**Method:** `POST`  
+**Description:** Initiates a mock AI analysis for a given compound.  
 
-2. **Get Price Comparison by ID**
-   - **Endpoint**: `/api/price_comparisons/{comparison_id}`
-   - **Method**: `GET`
-   - **Parameters**: `comparison_id` (path) - ID of the price comparison
-   - **Description**: Retrieves a specific price comparison by its ID.
-   - **Response**:
-     ```json
-     {
-       "comparison_id": 1,
-       "procedure_id": 1,
-       "facility_id": 1,
-       "country_id": 2,
-       "us_price": 20000,
-       "international_price": 8000,
-       "travel_cost": 1500
-     }
-     ```
+#### Request Body Parameters:
+- `compound_id`: `UUID` (required) - The unique ID of the compound for simulation.
 
-3. **Add New Price Comparison**
-   - **Endpoint**: `/api/price_comparisons`
-   - **Method**: `POST`
-   - **Request Body**:
-     ```json
-     {
-       "procedure_id": 1,
-       "facility_id": 2,
-       "country_id": 3,
-       "us_price": 25000,
-       "international_price": 10000,
-       "travel_cost": 2000
-     }
-     ```
-   - **Description**: Adds a new price comparison entry.
-   - **Response**:
-     ```json
-     {
-       "comparison_id": 3,
-       "procedure_id": 1,
-       "facility_id": 2,
-       "country_id": 3,
-       "us_price": 25000,
-       "international_price": 10000,
-       "travel_cost": 2000
-     }
-     ```
+#### Response Body:
+- `simulation_id`: `UUID` - Identifier for the initiated simulation.
+- `status`: `string` - Current simulation status.
 
-4. **Update Price Comparison**
-   - **Endpoint**: `/api/price_comparisons/{comparison_id}`
-   - **Method**: `PUT`
-   - **Parameters**: `comparison_id` (path) - ID of the price comparison
-   - **Request Body**:
-     ```json
-     {
-       "us_price": 26000,
-       "international_price": 10500,
-       "travel_cost": 2100
-     }
-     ```
-   - **Description**: Updates an existing price comparison's details.
-   - **Response**:
-     ```json
-     {
-       "comparison_id": 3,
-       "procedure_id": 1,
-       "facility_id": 2,
-       "country_id": 3,
-       "us_price": 26000,
-       "international_price": 10500,
-       "travel_cost": 2100
-     }
-     ```
+#### Exceptions:
+- `404 Not Found` if the compound ID is not valid.
 
-5. **Delete Price Comparison**
-   - **Endpoint**: `/api/price_comparisons/{comparison_id}`
-   - **Method**: `DELETE`
-   - **Parameters**: `comparison_id` (path) - ID of the price comparison
-   - **Description**: Deletes a price comparison entry from the database.
-   - **Response**: `204 No Content`
+---
 
-### Bookings API
+### 4. Report API
+**Path:** `/api/reports/download/{compound_id}`  
+**Method:** `GET`  
+**Description:** Downloads a PDF summary report for a specific compound.  
 
-1. **Get All Bookings**
-   - **Endpoint**: `/api/bookings`
-   - **Method**: `GET`
-   - **Description**: Retrieves all bookings made by users.
-   - **Response**:
-     ```json
-     [
-       {
-         "booking_id": 1,
-         "user_id": 1,
-         "facility_id": 2,
-         "procedure_id": 1,
-         "itinerary": "Details...",
-         "status": "Pending"
-       },
-       ...
-     ]
-     ```
+#### Path Parameters:
+- `compound_id`: `UUID` - The unique identifier of the compound.
 
-2. **Get Booking by ID**
-   - **Endpoint**: `/api/bookings/{booking_id}`
-   - **Method**: `GET`
-   - **Parameters**: `booking_id` (path) - ID of the booking
-   - **Description**: Retrieves details of a specific booking by its ID.
-   - **Response**:
-     ```json
-     {
-       "booking_id": 1,
-       "user_id": 1,
-       "facility_id": 2,
-       "procedure_id": 1,
-       "itinerary": "Details...",
-       "status": "Pending"
-     }
-     ```
+#### Response Body:
+- **Binary PDF file** - The generated report file.
 
-3. **Add New Booking**
-   - **Endpoint**: `/api/bookings`
-   - **Method**: `POST`
-   - **Request Body**:
-     ```json
-     {
-       "user_id": 1,
-       "facility_id": 2,
-       "procedure_id": 1,
-       "itinerary": "Itinerary details...",
-       "status": "Pending"
-     }
-     ```
-   - **Description**: Adds a new booking request to the database.
-   - **Response**:
-     ```json
-     {
-       "booking_id": 3,
-       "user_id": 1,
-       "facility_id": 2,
-       "procedure_id": 1,
-       "itinerary": "Itinerary details...",
-       "status": "Pending"
-     }
-     ```
+#### Exceptions:
+- `404 Not Found` if the report for the compound does not exist.
 
-4. **Update Booking**
-   - **Endpoint**: `/api/bookings/{booking_id}`
-   - **Method**: `PUT`
-   - **Parameters**: `booking_id` (path) - ID of the booking
-   - **Request Body**:
-     ```json
-     {
-       "status": "Confirmed",
-       "itinerary": "Updated itinerary details..."
-     }
-     ```
-   - **Description**: Updates the status and itinerary details of an existing booking.
-   - **Response**:
-     ```json
-     {
-       "booking_id": 3,
-       "user_id": 1,
-       "facility_id": 2,
-       "procedure_id": 1,
-       "itinerary": "Updated itinerary details...",
-       "status": "Confirmed"
-     }
-     ```
+---
 
-5. **Delete Booking**
-   - **Endpoint**: `/api/bookings/{booking_id}`
-   - **Method**: `DELETE`
-   - **Parameters**: `booking_id` (path) - ID of the booking
-   - **Description**: Deletes a booking entry from the database.
-   - **Response**: `204 No Content`
+## Models
 
-### Utility Components
+### 1. User Model
+**Attributes:**
+- `user_id`: `UUID` - Primary Key.
+- `username`: `string` - Unique.
+- `password_hash`: `string`.
+- `created_at`: `TIMESTAMP`.
+- `last_login`: `TIMESTAMP`, nullable.
 
-#### Models
+### 2. Compound Model
+**Attributes:**
+- `compound_id`: `UUID` - Primary Key.
+- `user_id`: `UUID` - Foreign Key.
+- `chemical_structure`: `string`.
+- `upload_timestamp`: `TIMESTAMP`.
 
-- **Procedures**: Maps to the `Procedures` table and manages CRUD operations for medical procedures.
-- **Facilities**: Maps to `Facilities` and handles CRUD operations for facility information.
-- **PriceComparisons**: Maps to `PriceComparisons` facilitating CRUD operations for financial data.
-- **Bookings**: Maps to `Bookings`, handling CRUD operations related to user bookings.
+### 3. Simulation Model
+**Attributes:**
+- `simulation_id`: `UUID` - Primary Key.
+- `compound_id`: `UUID` - Foreign Key.
+- `simulation_result`: `JSON`.
+- `status`: `string`.
+- `created_at`: `TIMESTAMP`.
 
-#### Schemas
+### 4. Binding Affinity Model
+**Attributes:**
+- `binding_id`: `UUID` - Primary Key.
+- `simulation_id`: `UUID` - Foreign Key.
+- `before_affinity`: `float`.
+- `after_affinity`: `float`.
+- `created_at`: `TIMESTAMP`.
 
-- **ProceduresSchema**: Validation schema for requests and responses concerning procedures.
-- **FacilitiesSchema**: Schema for facility-related data exchanges.
-- **PriceComparisonsSchema**: Validation layer for price comparison operations.
-- **BookingsSchema**: Manages request and response validation for booking operations.
+### 5. Repurposing Suggestion Model
+**Attributes:**
+- `suggestion_id`: `UUID` - Primary Key.
+- `compound_id`: `UUID` - Foreign Key.
+- `therapeutic_area`: `string`.
+- `suggestion_details`: `string`.
+- `created_at`: `TIMESTAMP`.
 
-#### Services
+### 6. Report Model
+**Attributes:**
+- `report_id`: `UUID` - Primary Key.
+- `compound_id`: `UUID` - Foreign Key.
+- `content`: `BYTEA`.
+- `created_at`: `TIMESTAMP`.
 
-- **PricingService**: Handles business logic related to performing price comparisons.
-- **TravelEstimatorService**: Estimation logic for calculating additional travel costs.
-- **TwilioChatService**: Manages chat interactions using Twilio, simulating a travel advisor.
+---
 
-#### Utilities
+## Schemas
 
-- **HelperUtils**: Contains helper functions common across different modules, ensuring DRY code practices.
+### 1. User Schema
+**Properties:**
+- `username`: `string`.
+- `password`: `string` (only in request schema).
 
-With this comprehensive setup, the backend efficiently supports all functionalities of the MediGlobal Connect platform while ensuring data integrity, security, and performance.
+### 2. Compound Schema
+**Properties:**
+- `chemical_structure`: `string`.
+
+---
+
+## CRUD Operations
+
+### 1. User CRUD
+**Operations:**
+- Create user
+- Retrieve user by ID
+- Retrieve user by username
+
+### 2. Compound CRUD
+**Operations:**
+- Create compound
+- Retrieve compound by ID
+- List compounds by user
+
+---
+
+## Services
+
+### 1. AuthService
+**Responsibilities:**
+- Handle user authentication processes.
+- Generate JWT tokens.
+- Manage password hashing.
+
+### 2. CompoundService
+**Responsibilities:**
+- Logic for processing compound uploads.
+- Managing simulations.
+- Generating reports.
+
+---
+
+## Utilities
+
+### 1. JWT Utility
+**Functions:**
+- Generate and verify JWT tokens.
+
+### 2. PDF Generator Utility
+**Functions:**
+- Convert simulation and compound data into downloadable PDF reports.
+
+---
+
+## Conclusion
+This document provides a comprehensive blueprint for building the backend of the AI-Driven Drug Repurposing Platform. Each component and functionality is designed to ensure a robust, scalable, and maintainable system that aligns with both frontend requirements and overall project goals.
+
