@@ -18,7 +18,7 @@ Before beginning the implementation, review the relevant files to gain a clear u
 ### **2. Backend Implementation**
 
 #### **a. Organize the project structure**
-Ensure the project structure follows the specifications outlined in `requirements/project-structure.md`.
+Ensure the project structure follows the specifications outlined in `requirements/project_structure.md`.
 
 #### **b. Implement Features & Components**
 - Develop the backend based on the feature specifications in `requirements/details.md`.
@@ -28,18 +28,18 @@ Ensure the project structure follows the specifications outlined in `requirement
 ---
 
 ### **3 API Implementation Rule**  
-- Referencing `requirements/details.md` and `requirements/project-structure.md`, implement each API group name in details.md with complete endpoint code, including actual database interaction logic, and configure router settings with the server **without user authentication**. 
+- Referencing `requirements/details.md` and `requirements/project_structure.md`, implement each API group name in details.md with complete endpoint code, including actual database interaction logic, and configure router settings with the server **without user authentication**. 
 
 
 ---
 
 ### **4. Update Scratchpad & Notes Files**
 
-#### **Scratchpad (`cursorDev/scratchpad.md`)**
+#### **Scratchpad (`cursor_dev/backend/backend_scratchpad.md`)**
 - Log work-in-progress changes, ongoing debugging efforts, and temporary notes.
 - Keep track of any bugs, blockers, or pending tasks.
 
-#### **Notes File (`cursorDev/notes.md`)**
+#### **Notes File (`cursor_dev/backend/backend_notes.md`)**
 - Document key design choices, implementation decisions, challenges faced, and resolutions.
 - Maintain a record of dependencies installed, performance optimizations, and areas for future improvement.
 - Ensure that both files remain structured, up-to-date, and accessible for future reference.
@@ -48,7 +48,7 @@ Ensure the project structure follows the specifications outlined in `requirement
 
 ### **5. Validate & Finalize the Backend Implementation**
 - Cross-check the completed implementation against:
-  - `requirements/project-structure.md` to ensure the correct project structure.
+  - `requirements/project_structure.md` to ensure the correct project structure.
   - `requirements/details.md` to verify feature completion.
   - `.cursor/rules/backend.mdc` to ensure compliance with coding and development guidelines.
 - Conduct final testing to verify that the implemented features function as expected.

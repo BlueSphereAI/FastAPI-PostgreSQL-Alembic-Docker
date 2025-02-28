@@ -4,9 +4,9 @@ globs:
 ---
 # Instructions
 
-During your interaction with the user, if you find anything reusable in this project (e.g. version of a library, model name), especially about a fix to a mistake you made or a correction you received, you should take note in the `cursorDev/notes.md` file so you will not make the same mistake again. 
+During your interaction with the user, if you find anything reusable in this project (e.g. version of a library, model name), especially about a fix to a mistake you made or a correction you received, you should take note in the `cursor_dev/backend/backend_notes.md` file so you will not make the same mistake again. 
 
-You should also use the `cursorDev/scratchpad.md` file as a Scratchpad to organize your thoughts. Especially when you receive a new task, you should first review the content of the Scratchpad, clear old different task if necessary, first explain the task, and plan the steps you need to take to complete the task. You can use todo markers to indicate the progress, e.g.
+You should also use the `cursor_dev/backend/backend_scratchpad.md` file as a Scratchpad to organize your thoughts. Especially when you receive a new task, you should first review the content of the Scratchpad, clear old different task if necessary, first explain the task, and plan the steps you need to take to complete the task. You can use todo markers to indicate the progress, e.g.
 [X] Task 1
 [ ] Task 2
 
@@ -37,5 +37,12 @@ Apply the following rules to the codebase
 ## Database rules
 - Create a new directory for each database model in app/database directory with __init__.py, model.py and service.py.
 - New model should be derived from BaseModel and new service should be derived from BaseService. Never miss table=True at the model class definition.
-- After every change in database, update __init__.py file in app/database directory to include all the models except for the base model. Then, execute "make initialMigration" to create the initial migration. After that, execute "make applyMigration" to apply the migration on your own. Before executing these commands, make sure to be in the backend directory.
-.
+- After every change in database, update __init__.py file in app/database directory to include all the models except for the base model.
+- Do not execute any database commands or attempt to connect to the database.
+- Do not run Alembic commands. 
+- Use `.env.local` for the database connection URL, but do not connect to the database now**. The DB string is for reference only, indicating where the database is located and where to connect in the future.  
+
+## General Restrictions
+- Do not run the project.
+- Do not modify or interact with Docker. 
+- Your only goal is to implement the given feature without altering the database or project setup. 
