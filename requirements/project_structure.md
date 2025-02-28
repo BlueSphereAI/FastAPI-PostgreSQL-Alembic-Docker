@@ -6,21 +6,35 @@ This project implements a modern web application using FastAPI, PostgreSQL, SQLA
 ## Directory Structure
 ```
 FastAPI-PostgreSQL-Alembic-Docker/
-├── backend/                     # Main backend application code
-│   ├── alembic/                # Database migration files
+├── backend/                     # Main application directory
+│   ├── alembic/                # Database migrations
+│   │   ├── versions/          # Migration files
+│   │   └── env.py            # Alembic configuration
+│   │
 │   ├── app/                    # Application source code
 │   │   ├── api/               # API endpoints
 │   │   │   └── v1/           # API version 1
-│   │   ├── database/         # Database models and services
-│   │   │   ├── base/        # Base models and services
-│   │   │   └── [models]/    # Individual model directories
-│   │   └── config.py        # Application configuration
-│   ├── .env.local           # Local environment variables
+│   │   │       ├── api.py    # Router registration
+│   │   │       └── endpoints/ # API endpoint modules
+│   │   │
+│   │   ├── core/             # Core functionality
+│   │   │   └── security.py   # Authentication & security
+│   │   │
+│   │   ├── database/         # Database layer
+│   │   │   ├── base/        # Base models & services
+│   │   │   └── [models]/    # Individual model modules
+│   │   │
+│   │   └── dependencies/     # FastAPI dependencies
+│   │       ├── database.py  # Database session
+│   │       └── auth.py     # Authentication
+│   │
+│   ├── .env.local            # Environment variables
 │   ├── Dockerfile           # Docker configuration
-│   ├── alembic.ini         # Alembic configuration
-│   ├── Makefile            # Development commands
-│   └── pyproject.toml      # Poetry dependencies
-└── docker-compose.yml       # Docker services configuration
+│   ├── pyproject.toml      # Poetry dependencies
+│   └── alembic.ini        # Alembic settings
+│
+├── docker-compose.dev.yml    # Development Docker setup
+└── docker-compose.local.yml  # Local Docker setup
 ```
 
 ## Key Components
@@ -57,6 +71,11 @@ FastAPI-PostgreSQL-Alembic-Docker/
 - **Commands**:
   - `make initialMigration`: Create new migration
   - `make applyMigration`: Apply pending migrations
+
+### 5. Dependencies (app/dependencies/)
+- Database session management
+- Authentication middleware
+- Common dependencies
 
 ## Development Guidelines
 
@@ -144,4 +163,4 @@ When creating a new database model:
 - Validate input data
 - Implement proper CORS settings
 
-This structure provides a solid foundation for building scalable FastAPI applications with proper separation of concerns and maintainable code organization. 
+This structure provides a solid foundation for building scalable FastAPI applications with proper separation of concerns and maintainable code organization.

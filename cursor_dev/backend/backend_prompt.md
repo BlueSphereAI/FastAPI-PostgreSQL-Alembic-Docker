@@ -29,6 +29,9 @@ Ensure the project structure follows the specifications outlined in `requirement
 - Implement code in alignment with the project requirements outlined in `requirements/prd.md`.  
 - Follow the specific task implementations as described in `requirements/task.md`.  
 - Ensure that all required libraries, frameworks, and configurations are correctly set up.  
+- All code must be written inside the backend directory.
+-  For configurations such as database and Python environment packages, refer to the configuration files inside the backend directory, including alembic.ini and pyproject.toml.
+- Use the virtual environment located in the backend directory by running source backend/.venv/bin/activate
 
 ---  
 
