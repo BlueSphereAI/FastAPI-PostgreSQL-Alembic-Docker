@@ -1,0 +1,89 @@
+---
+description: It provides structured guidelines for task management and project organization, emphasizing the use of notes and a scratchpad for tracking progress. It includes instructions for database management, migrations, and error resolution to ensure consistency in the development workflow.
+globs: 
+---
+# Instructions
+
+During your interaction with the user, if you find anything reusable in this project (e.g. version of a library, model name), especially about a fix to a mistake you made or a correction you received, you should take note in the `cursor_dev/database/database_notes.md` file so you will not make the same mistake again. 
+
+You should also use the `cursor_dev/database/database_scratchpad.md` file as a Scratchpad to organize your thoughts. Especially when you receive a new task, you should first review the content of the Scratchpad, clear old different task if necessary, first explain the task, and plan the steps you need to take to complete the task. You can use todo markers to indicate the progress, e.g.
+[X] Task 1
+[ ] Task 2
+
+Also update the progress of the task in the Scratchpad when you finish a subtask.
+Especially when you finished a milestone, it will help to improve your depth of task accomplishment to use the Scratchpad to reflect and plan.
+The goal is to help you maintain a big picture as well as the progress of the task. Always refer to the Scratchpad when you plan the next step
+
+#Important
+Always check the scratchpad and implement tasks that are not yet completed. Implement tasks one by one. If you believe a task is done, update the scratchpad and verify if any tasks are still pending. Ensure that all tasks have been implemented—do not miss a single task. This should always be followed in the workflow.
+
+#Rule  
+
+---
+
+# **Database Rules (PostgreSQL, SQLAlchemy, and Alembic)**  
+
+## **General Database Guidelines**  
+- The project uses **PostgreSQL** as the database.  
+- **Do not manually start or stop the PostgreSQL container**—it is already running.  
+- Check `docker-compose.local.yml` for **database credentials** (**username, password, database name**).  
+- **If the database already exists**:  
+  - **Create a new database** and update the source code where database connections are required.  
+  - **Modify the database name** in `docker-compose.local.yml` accordingly.  
+- Use the **database connection URL** from `backend/.env.local`, but **do not connect manually**—this is for reference only.  
+
+---
+
+## **PostgreSQL Rules**  
+- Use **PostgreSQL**-specific data types whenever possible for performance and accuracy.  
+- Ensure all tables use **UUIDs** for primary keys unless an integer ID is explicitly required.  
+- Always **define constraints** such as `NOT NULL`, `UNIQUE`, and `CHECK` where applicable.  
+- For indexing:  
+  - Use **BTREE indexes** for filtering and sorting.  
+  - Use **GIN indexes** for JSONB fields or full-text search.  
+- **Foreign keys** must use **ON DELETE CASCADE** if the related table should remove dependent data.  
+
+---
+
+## **SQLAlchemy Rules**  
+- Use **SQLAlchemy ORM** for defining database models.  
+- Each database model should be inside `backend/app/database/` with the following 
+- **Model Guidelines:**  
+  - Each model must inherit from `BaseModel`.  
+  - **Include** `table=True` in the model definition:  
+    ```python
+    from sqlmodel import SQLModel, Field
+
+    class ExampleModel(SQLModel, table=True):
+        id: int = Field(default=None, primary_key=True)
+        name: str = Field(nullable=False)
+    ```
+  - Use **Field()** for defining constraints (e.g., `nullable=False`, `unique=True`).  
+  - Always **define relationships** using `Relationship()`, ensuring lazy loading when necessary.  
+
+---
+
+## **Alembic Rules**  
+- The project uses **Alembic** for managing database migrations.  
+- **Never modify the database schema manually**—always use migrations.  
+- After making changes to models, follow these steps:  
+  1. **Generate a new migration:**  
+     ```bash
+     alembic revision --autogenerate -m "Describe changes"
+     ```  
+  2. **Apply the migration:**  
+     ```bash
+     alembic upgrade head
+     ```  
+  3. If rolling back is required, use:  
+     ```bash
+     alembic downgrade -1
+     ```  
+- After running migrations, verify that `backend/app/database/__init__.py` is updated with the latest models.  
+
+
+---
+
+
+
+
