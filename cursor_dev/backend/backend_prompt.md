@@ -37,6 +37,7 @@ Ensure the project structure follows the specifications outlined in `requirement
 
 ### **3 API Implementation Rule**  
 - Referencing `requirements/details.md`, `requirements/project_structure.md`, `requirements/prd.md`, and `requirements/task.md`, implement each API group mentioned in `requirements/details.md` with complete endpoint code, including actual database interaction logic, and configure router settings with the server **without user authentication**.  
+- Always add api_router in backend/app/server.py to ensure that all API routes are properly registered with the FastAPI application.
 
 ---  
 
