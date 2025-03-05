@@ -1,6 +1,7 @@
 ---
 description: This file defines rules for maintaining project consistency, including structured note-taking in cursorDev/notes.md, task management in cursorDev/scratchpad.md, and enforcing best practices for module installation, imports, type annotations, and database management.
 globs: 
+alwaysApply: false
 ---
 # Instructions
 
@@ -35,6 +36,7 @@ Apply the following rules to the codebase
 - Import db dependencies from app.dependencies.database instead of app.dependencies.db.
 
 ## Database rules
+- Use the SQLAlchemy Python library for all database interactions.
 - Create a new directory for each database model in app/database directory with __init__.py, model.py and service.py.
 - New model should be derived from BaseModel and new service should be derived from BaseService. Never miss table=True at the model class definition.
 - After every change in database, update __init__.py file in app/database directory to include all the models except for the base model.
