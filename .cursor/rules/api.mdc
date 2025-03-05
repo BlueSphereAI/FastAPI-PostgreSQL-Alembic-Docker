@@ -1,0 +1,44 @@
+---
+description: This file defines rules for maintaining project consistency when performing API testing using cURL, including structured note-taking, task management, and enforcing best practices for constructing, testing, and documenting API requests.
+globs: 
+alwaysApply: false
+---
+# Instructions
+
+- **Reusable Information:**  
+  Whenever you learn something reusable in this project (e.g., common API endpoints, authentication methods, headers, or parameters), take notes in `cursor_dev/api_testing/api_testing_notes.md` to avoid repeating mistakes.
+
+- **Scratchpad Usage:**  
+  Use `cursor_dev/api_testing/api_testing_scratchpad.md` as a **Scratchpad** to organize your testing approach:
+  - **Initial Planning:** When starting a new testing task, review the existing scratchpad content, clear irrelevant information, and explain the task and steps required.
+  - **Progress Tracking:** Mark progress using checkboxes:
+    ```markdown
+    [X] Define API endpoint and request type (GET, POST, etc.)
+    [ ] Create a cURL command with necessary headers
+    [ ] Execute and validate the API response
+    ```
+  - **Reflection:** After completing a task, reflect and plan the next steps to maintain a clear understanding of the testing process.
+
+  # cURL Command Rules
+
+- **Consistency:**  
+  - Use clear and descriptive comments before each cURL command.
+  - Always include all necessary headers, authentication tokens, and parameters.
+
+- **Formatting:**  
+  - Use multi-line formatting for better readability:
+    ```bash
+    curl -X POST "https://example.com/api" \
+      -H "Authorization: Bearer <token>" \
+      -H "Content-Type: application/json" \
+      -d '{"key": "value"}'
+    ```
+
+- **Error Handling:**  
+  - Always include `-v` (verbose) or `-i` (include headers) flags when troubleshooting.
+  - Capture output to a file if needed:
+    ```bash
+    curl -X GET "https://example.com/api" -o response.json
+    ```
+
+  
