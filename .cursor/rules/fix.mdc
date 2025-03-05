@@ -1,0 +1,22 @@
+---
+description: This file defines rules for maintaining project consistency when identifying and fixing errors in the backend codebase, including structured note-taking, task management, and best practices for troubleshooting and debugging.
+globs: 
+alwaysApply: false
+---
+# Instructions
+
+- **Reusable Information:**  
+  Whenever you discover a fix to a specific error or identify a common troubleshooting step, document it in `cursor_dev/error_fixing/error_fixing_notes.md` to avoid repeating mistakes.
+
+- **Scratchpad Usage:**  
+  Use `cursor_dev/error_fixing/error_fixing_scratchpad.md` as a **Scratchpad** to organize the error-fixing process:
+  - **Initial Planning:** When starting a new error-fixing task, review the existing scratchpad content, clear irrelevant information, and explain the issue and steps required for resolution.
+  - **Progress Tracking:** Mark progress using checkboxes:
+    ```markdown
+    [X] Identify the error
+    [ ] Locate the source of the error
+    [ ] Implement the fix
+    [ ] Test to confirm resolution
+    ```
+  - **Reflection:** After resolving an error, reflect and plan the next steps to maintain a clear understanding of the project's stability.
+

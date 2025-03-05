@@ -19,29 +19,13 @@
 
     - The backend server is hosted at http://localhost:8000. If the server is not found, inspect the backend directory to determine the correct server hosting details.
 
+5. **Running the Server:**
+  - Activate the Python virtual environment using the command 'source .venv/bin/activate' in the **backend** directory.
+  - Run the backend server using the command `make runLocal`. The **Makefile** is located in the **backend** directory.
+  - Observe the terminal for errors, warnings, or unexpected behavior.
+  - Identify, analyze, and fix all errors found during runtime.
 
 
-# cURL Command Rules
-
-- **Consistency:**  
-  - Use clear and descriptive comments before each cURL command.
-  - Always include all necessary headers, authentication tokens, and parameters.
-
-- **Formatting:**  
-  - Use multi-line formatting for better readability:
-    ```bash
-    curl -X POST "https://example.com/api" \
-      -H "Authorization: Bearer <token>" \
-      -H "Content-Type: application/json" \
-      -d '{"key": "value"}'
-    ```
-
-- **Error Handling:**  
-  - Always include `-v` (verbose) or `-i` (include headers) flags when troubleshooting.
-  - Capture output to a file if needed:
-    ```bash
-    curl -X GET "https://example.com/api" -o response.json
-    ```
 
 # Best Practices
 
