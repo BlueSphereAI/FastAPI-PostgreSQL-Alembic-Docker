@@ -19,6 +19,9 @@ alwaysApply: false
     ```
   - **Reflection:** After completing a task, reflect and plan the next steps to maintain a clear understanding of the testing process.
 
+ - **cURL Command Logging:**
+Whenever a cURL command is executed successfully, log the command along with a clear description in the file `cursor_dev/api_testing/curl.md` to maintain a record of tested API endpoints.
+
   # cURL Command Rules
 
 - **Consistency:**  

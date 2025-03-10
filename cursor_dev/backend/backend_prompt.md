@@ -38,6 +38,7 @@ Ensure the project structure follows the specifications outlined in `requirement
 ### **3 API Implementation Rule**  
 - Referencing `requirements/details.md`, `requirements/project_structure.md`, `requirements/prd.md`, and `requirements/task.md`, implement each API group mentioned in `requirements/details.md` with complete endpoint code, including actual database interaction logic, and configure router settings with the server **without user authentication**.  
 - Always add api_router in backend/app/server.py to ensure that all API routes are properly registered with the FastAPI application.
+- Ensure pyproject.toml in the backend directory includes all necessary Python dependencies, such as FastAPI, SQLAlchemy, asyncpg, Alembic, Uvicorn, Pydantic, and any other packages required by the project. Add the dependency in the file if needed.
 
 ---  
 

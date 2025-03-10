@@ -7,6 +7,7 @@
    - Implement tasks one by one.
    - Update the scratchpad upon completing a subtask or milestone.
    - Verify if any tasks are pending before considering a task as complete.
+   -If a curl command is successful, add the curl command with a description to the file `cursor_dev/api_testing/curl.md`
 
 3. **Avoid Missing Tasks:**  
    Ensure all tasks are accounted for and implemented—never skip a task.
@@ -24,6 +25,7 @@
   - Run the backend server using the command `make runLocal`. The **Makefile** is located in the **backend** directory.
   - Observe the terminal for errors, warnings, or unexpected behavior.
   - Identify, analyze, and fix all errors found during runtime.
+  - If needed, add python dependencies to `backend/pyproject.toml`
 
 
 

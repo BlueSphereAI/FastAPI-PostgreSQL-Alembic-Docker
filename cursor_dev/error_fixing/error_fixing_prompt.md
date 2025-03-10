@@ -1,38 +1,69 @@
+# **Test Script Writing Guidelines**
 
+### **1. Always Check the Scratchpad:**
+- Before starting a new testing task, review the scratchpad for incomplete tasks and prioritize them.
+- Complete tasks sequentially and update the scratchpad accordingly.
 
-# Important Guidelines
+### **2. Task Implementation:**
+- Implement test scripts one by one, focusing on verifying backend logic, particularly for APIs.
+- Update the scratchpad upon completing a subtask or milestone.
+- Verify if any testing tasks are pending before considering a task as complete.
 
-1. **Always Check the Scratchpad:**  
-   Before starting a new error-fixing task, review the scratchpad for incomplete tasks and prioritize them. Complete tasks sequentially and update the scratchpad accordingly.
+### **3. API Testing Focus:**
+- Write test scripts to cover all available API endpoints, ensuring proper request and response behavior.
+- Validate status codes, response data, and error handling scenarios.
 
-2. **Task Implementation:**  
-   - Implement fixes one by one.
-   - Update the scratchpad upon completing a subtask or milestone.
-   - Verify if any tasks are pending before considering a task as complete.
+---
 
-3. **Avoid Missing Tasks:**  
-   Ensure all identified errors are accounted for and resolved—never skip an error.
+# **Backend Server Setup**
 
-4. **Running the Server:**
-  - Activate the Python virtual environment using the command 'source .venv/bin/activate' in the **backend** directory.
-  - Run the backend server using the command `make runLocal`. The **Makefile** is located in the **backend** directory.
-  - Observe the terminal for errors, warnings, or unexpected behavior.
-  - Identify, analyze, and fix all errors found during runtime.
+### **Check Server Status:**
+- The backend server should be running at **http://localhost:8000**.
+- If the server is not running, follow these steps:
+  - Activate the Python virtual environment:
+    ```bash
+    source .venv/bin/activate
+    ```
+  - Run the server using the Makefile:
+    ```bash
+    make runLocal
+    ```
+  - Observe the terminal for any errors, warnings, or unexpected behavior.
 
-# Best Practices
+---
 
-- **Error Identification:**  
-  - Pay attention to error messages, stack traces, and logs.
-  - Utilize tools like `pdb`, `print()`, or logging for debugging if needed.
+# **Test Script Management**
 
-- **Systematic Fixing:**  
-  - Tackle errors systematically, starting with critical errors that block the application from running.
-  - Ensure that each fix is tested thoroughly before moving on to the next issue.
+### **Folder Structure:**
+- Store all test scripts under a dedicated **test** directory within the **backend** directory to maintain organization:
+  ```plaintext
+  backend/
+    └── test/
+        ├── test_api_endpoints.py
+        └── test_database_logic.py
+  ```
 
-- **Validation:**  
-  - After fixing an error, rerun the server and validate the fix.
-  - Check the application behavior to ensure no new issues are introduced.
+### **Dependency Management:**
+- If new testing dependencies are required, update the **pyproject.toml** file accordingly.
+- Run:
+```bash
+poetry add <package_name>
+```
 
-- **Documentation:**  
-  - Document the error, the fix implemented, and any relevant insights for future reference.
+---
+
+# **cURL Command Logging:**
+- Whenever a cURL command is executed successfully, log the command along with a clear description in the file `cursor_dev/api_testing/curl.md` to maintain a record of tested API endpoints.
+
+---
+
+# **Best Practices for Testing**
+
+### **Validation:**
+- Run all test scripts and validate outputs against expected results.
+- Perform both positive and negative test cases to ensure robustness.
+
+### **Documentation:**
+- Document each test, expected behavior, and actual results for future reference.
+- Include notes on edge cases and potential improvements identified during testing.
 
