@@ -1,5 +1,6 @@
 # Use the official Python image
-FROM python:3.10.12
+#FROM python:3.10.12
+FROM python:3.11.6
 
 # Environment variables
 ENV POETRY_VIRTUALENVS_IN_PROJECT=true \

@@ -31,6 +31,9 @@
     ```
   - Observe the terminal for any errors, warnings, or unexpected behavior.
 
+### **Database Connection:**
+- Use `backend/.env.local` for the database connection URL. 
+
 ---
 
 # **Test Script Management**
