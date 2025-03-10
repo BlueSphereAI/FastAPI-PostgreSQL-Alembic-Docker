@@ -19,6 +19,7 @@
 
 ### **Check Server Status:**
 - The backend server should be running at **http://localhost:8000**.
+  - Check with command `netstat -tuln | grep 8000 | cat` or `ss -tuln | grep 8000 | cat` or `curl -s http://localhost:8000/docs`
 - If the server is not running, follow these steps:
   - Activate the Python virtual environment:
     ```bash
