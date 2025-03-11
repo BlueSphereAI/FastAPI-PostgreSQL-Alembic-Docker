@@ -44,6 +44,11 @@ Always check the scratchpad and implement tasks that are not yet completed. Impl
 - Do not run Alembic commands. 
 - Use `backend/.env.local` for the database connection URL, but do not connect to the database now. The DB string is for reference only, indicating where the database is located and where to connect in the future.  
 
+## **. Dependency Management**
+- Ensure pyproject.toml in the backend directory includes all necessary Python dependencies.
+- Required packages include FastAPI, SQLAlchemy, asyncpg, Alembic, Uvicorn, Pydantic, and any other project-specific dependencies.
+- If a required package is missing or an additional package is needed, update pyproject.toml accordingly and install it using poetry install
+
 ## **General Restrictions**
 - Do not run the project.
 - Do not modify or interact with Docker. 

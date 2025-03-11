@@ -48,5 +48,7 @@ alwaysApply: false
 - Require all tests to pass before merging new code.  
 
 
-
+## **7. Dependency Management**
+- Ensure pyproject.toml in the backend directory includes all necessary Python dependencies.
+- If a required package is missing or an additional package is needed, update pyproject.toml accordingly and install it using poetry install
 
