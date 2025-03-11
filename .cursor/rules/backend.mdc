@@ -16,12 +16,16 @@ Especially when you finished a milestone, it will help to improve your depth of 
 The goal is to help you maintain a big picture as well as the progress of the task. Always refer to the Scratchpad when you plan the next step
 
 # Important
-Always check the scratchpad and implement tasks that are not yet completed. Implement tasks one by one. If you believe a task is done, update the scratchpad and verify if any tasks are still pending. Ensure that all tasks have been implemented—do not miss a single task. This should always be followed in the workflow.
-
-
+- Always check the scratchpad and implement tasks that are not yet completed. Implement tasks one by one. If you believe a task is done, update the scratchpad and verify if any tasks are still pending. Ensure that all tasks have been implemented—do not miss a single task. This should always be followed in the workflow.
 
 # Rules
 **Apply the following rules to the codebase**
+
+# **Import Rule: User Authentication API Implementation**  
+
+## **Always Implement User Signup API**  
+- If the `requirements/details.md` file includes a **user login API**, you must also create and implement a **user signup API**.  
+- This ensures users can register before logging in, maintaining a complete authentication flow.  
 
 ## **Module installation rules**
 - Insall necessary python modules for generated code on your own using poetry instead of pip.
