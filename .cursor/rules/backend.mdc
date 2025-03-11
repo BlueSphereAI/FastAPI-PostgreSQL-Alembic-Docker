@@ -27,6 +27,11 @@ The goal is to help you maintain a big picture as well as the progress of the ta
 - If the `requirements/details.md` file includes a **user login API**, you must also create and implement a **user signup API**.  
 - This ensures users can register before logging in, maintaining a complete authentication flow.  
 
+## **User Authentication Rules**
+- If any API requires a user ID or UUID, use FastAPI dependency injection to retrieve the current user.
+- Do not hardcode user IDs in any API implementation.
+- Ensure that authentication is handled securely using FastAPI’s OAuth2 dependency.
+
 ## **Module installation rules**
 - Insall necessary python modules for generated code on your own using poetry instead of pip.
 - Especially for EmailStr, install pydantic[email].
