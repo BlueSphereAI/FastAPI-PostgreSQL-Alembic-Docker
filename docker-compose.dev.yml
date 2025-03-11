@@ -1,37 +1,37 @@
 services:
-  20079_backend:
+  "${idea_id}_backend":
     build: 
       context: ./backend
       dockerfile: Dockerfile
-    container_name: 20079_backend
+    container_name: "${idea_id}_backend"
     restart: always
     volumes:
-      - 20079_backend_static:/app/static
+      - "${idea_id}_backend_static:/app/static"
     environment:
-      - PG_DATABASE_URL=postgresql+asyncpg://fastapi:fastapi@20079_db:5432/postgres
+      - PG_DATABASE_URL=postgresql+asyncpg://fastapi:fastapi@${idea_id}_db:5432/postgres
       - ENVIRONMENT=development
     entrypoint: ["/app/scripts/start-backend.dev.sh"]
     depends_on:
-      20079_db:
+      "${idea_id}_db":
         condition: service_healthy
         
-  20079_frontend:
+  "${idea_id}_frontend":
     build: 
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        - VITE_BACKEND_URL=https://20079-v1.deepsphere.one
-    container_name: 20079_frontend
+        - VITE_BACKEND_URL=https://${idea_id}-v1.deepsphere.one
+    container_name: "${idea_id}_frontend"
     restart: always
     depends_on:
-      - 20079_backend
-      - 20079_db
+      - "${idea_id}_backend"
+      - "${idea_id}_db"
 
-  20079_db:
-    container_name: 20079_db
+  "${idea_id}_db":
+    container_name: "${idea_id}_db"
     image: postgres:16-alpine
     volumes:
-      - 20079_db:/var/lib/postgresql/data
+      - "${idea_id}_db:/var/lib/postgresql/data"
     environment:
       - POSTGRES_USER=fastapi
       - POSTGRES_PASSWORD=fastapi
@@ -44,8 +44,8 @@ services:
       timeout: 5s
       retries: 5
 
-  20079_nginx:
-    container_name: 20079_nginx
+  "${idea_id}_nginx":
+    container_name: "${idea_id}_nginx"
     restart: always
     build:
       context: ./nginx
@@ -53,12 +53,12 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     ports:
-      - "20079:20079"
+      - "${idea_id}:${idea_id}"
     depends_on:
-      - 20079_backend
-      - 20079_frontend
-      - 20079_db
+      - "${idea_id}_backend"
+      - "${idea_id}_frontend"
+      - "${idea_id}_db"
 
 volumes:
-  20079_db: {}
-  20079_backend_static: {}
+  "${idea_id}_db": {}
+  "${idea_id}_backend_static": {}
