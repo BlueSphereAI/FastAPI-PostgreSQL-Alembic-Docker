@@ -39,7 +39,12 @@ alwaysApply: false
 - Always include tests for API endpoints covering **success, failure, and edge cases**.  
 - Use assertions to validate **status codes** and **response structure**.  
 
-## **5. Running Tests**  
+## **5. Running Tests**   
+- Activate the virtual environment in the `backend` directory before running tests:  
+  ```bash
+  source .venv/bin/activate
+
+- Use environment variables from `.env.local` `backend` directory in  to ensure correct configurations.
 - Use `pytest tests/` to execute tests.  
 - Use `pytest -v` for detailed output.  
 
