@@ -1,0 +1,52 @@
+---
+description: This document provides structured guidelines for organizing, writing, and executing backend API tests, ensuring consistency, accuracy, and reliability in the testing process.
+globs: 
+alwaysApply: false
+---
+# Instructions
+
+- **Reusable Information:**  
+  Whenever you discover a fix to a specific error or identify a common troubleshooting step, document it in `cursor_dev/test/test_notes.md` to avoid repeating mistakes.
+
+- **Scratchpad Usage:**  
+  Use `cursor_dev/test/test_scratchpad.md` as a **Scratchpad** to organize the error-fixing process:
+  - **Initial Planning:** When starting a new error-fixing task, review the existing scratchpad content, clear irrelevant information, and explain the issue and steps required for resolution.
+  - **Progress Tracking:** Mark progress using checkboxes:
+    ```markdown
+    [X] Identify the error
+    [ ] Locate the source of the error
+    [ ] Implement the fix
+    [ ] Test to confirm resolution
+    ```
+  - **Reflection:** After resolving an error, reflect and plan the next steps to maintain a clear understanding of the project's stability.
+
+
+# **Rule: API Testing Best Practices**  
+
+## **1. Test Directory Structure**  
+- Store all test scripts inside the `tests/` directory at the root level.  
+- Organize tests into `unit/`, `integration/`, and `functional/` subdirectories as needed.  
+
+## **2. Testing Framework**  
+- Use `pytest` as the testing framework.  
+- Use `httpx` for making async API requests in tests.  
+
+## **3. Test Client & Fixtures**  
+- Define a **test database session** in `conftest.py` to isolate test data.  
+- Use `AsyncClient` from `httpx` for API requests.  
+
+## **4. Writing API Tests**  
+- Always include tests for API endpoints covering **success, failure, and edge cases**.  
+- Use assertions to validate **status codes** and **response structure**.  
+
+## **5. Running Tests**  
+- Use `pytest tests/` to execute tests.  
+- Use `pytest -v` for detailed output.  
+
+## **6. Continuous Testing**  
+- Ensure tests run automatically in CI pipelines.  
+- Require all tests to pass before merging new code.  
+
+
+
+

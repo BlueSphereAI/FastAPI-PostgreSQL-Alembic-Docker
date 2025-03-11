@@ -15,27 +15,27 @@ Also update the progress of the task in the Scratchpad when you finish a subtask
 Especially when you finished a milestone, it will help to improve your depth of task accomplishment to use the Scratchpad to reflect and plan.
 The goal is to help you maintain a big picture as well as the progress of the task. Always refer to the Scratchpad when you plan the next step
 
-#Important
+# Important
 Always check the scratchpad and implement tasks that are not yet completed. Implement tasks one by one. If you believe a task is done, update the scratchpad and verify if any tasks are still pending. Ensure that all tasks have been implemented—do not miss a single task. This should always be followed in the workflow.
 
 
 
 # Rules
-Apply the following rules to the codebase
+**Apply the following rules to the codebase**
 
-## Module installation rules
+## **Module installation rules**
 - Insall necessary python modules for generated code on your own using poetry instead of pip.
 - Especially for EmailStr, install pydantic[email].
 
-## Type expression rules
+## **Type expression rules**
 - Do not use call expressions like constr() for type annotations. Instead, use the type annotation directly.
 
-## Import rules
+## **Import rules**
 - Do not use relative imports. Instead, use absolute imports.
 - Import necessary python modules for generated code.
 - Import db dependencies from app.dependencies.database instead of app.dependencies.db.
 
-## Database rules
+## **Database rules**
 - Use the SQLAlchemy Python library for all database interactions.
 - Create a new directory for each database model in app/database directory with __init__.py, model.py and service.py.
 - New model should be derived from BaseModel and new service should be derived from BaseService. Never miss table=True at the model class definition.
@@ -44,7 +44,7 @@ Apply the following rules to the codebase
 - Do not run Alembic commands. 
 - Use `backend/.env.local` for the database connection URL, but do not connect to the database now. The DB string is for reference only, indicating where the database is located and where to connect in the future.  
 
-## General Restrictions
+## **General Restrictions**
 - Do not run the project.
 - Do not modify or interact with Docker. 
 - Your only goal is to implement the given feature without altering the database or project setup. 
