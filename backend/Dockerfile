@@ -28,7 +28,7 @@ WORKDIR /app
 RUN poetry config virtualenvs.in-project true
 
 # Copy only the dependency files  
-COPY pyproject.toml poetry.lock ./
+COPY pyproject.toml ./
 
 # Install dependencies  
 RUN poetry install --no-root  
