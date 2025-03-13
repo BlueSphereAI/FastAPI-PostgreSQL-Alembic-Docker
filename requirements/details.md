@@ -1,198 +1,176 @@
-# Backend Detailed Requirements
+# Backend Detailed Requirements  
 
-## Overview
-This document outlines the backend requirements for the AI-Driven Drug Repurposing Platform, detailing all necessary APIs, models, schemas, CRUD operations, services, and utilities to support the platform's core functionalities as described in the project overview and frontend detailed requirements.
+## API Endpoints  
 
-## API Endpoints
-
-### 1. Authentication API
-**Path:** `/api/auth/login`  
-**Method:** `POST`  
-**Description:** Authenticates a user and returns a JWT token upon successful login.  
-
-#### Request Body Parameters:
-- `username`: `string` (required) - The user's username.
-- `password`: `string` (required) - The user's password.
-
-#### Response Body:
-- `access_token`: `string` - JWT token for the authenticated user.
-- `token_type`: `string` - The type of token provided (e.g., "bearer").
-
-#### Exceptions:
-- `401 Unauthorized` if the credentials are invalid.
+Below is the list of API endpoints for managing different entities in the project. Each endpoint follows RESTful design principles and excludes user authentication concerns.  
 
 ---
 
-### 2. Compound Management API
-**Path:** `/api/compounds/upload`  
-**Method:** `POST`  
-**Description:** Allows the user to upload compound data.  
+## Users  
 
-#### Request Body Parameters:
-- `chemical_structure`: `string` (required) - Chemical structure or SMILES notation.
+### **GET /users/{user_id}**  
+**Path Parameters:**  
+- `user_id` (integer): The unique identifier of the user.  
 
-#### Response Body:
-- `message`: `string` - Confirmation message regarding successful upload.
-- `compound_id`: `UUID` - The unique identifier for the uploaded compound.
+**Response:**  
+- Returns user details (username, email, created_at).  
 
-#### Exceptions:
-- `400 Bad Request` if the compound data is improperly structured.
+**Exceptions:**  
+- `404 Not Found`: If no user exists for the given `user_id`.  
 
-**Path:** `/api/compounds/{compound_id}`  
-**Method:** `GET`  
-**Description:** Retrieves compound details including binding affinity and repurposing suggestions.  
+### **POST /users**  
+**Request Body:**  
+```json
+{
+  "username": "string",
+  "email": "string",
+  "password": "string"
+}
+```  
+**Response:**  
+- User creation confirmation including `user_id`.  
 
-#### Path Parameters:
-- `compound_id`: `UUID` - The unique identifier of the compound.
+**Exceptions:**  
+- `400 Bad Request`: If required fields are missing or invalid.  
 
-#### Response Body:
-- `compound`: `object` - Detailed information about the compound including simulations and suggestions.
+### **PUT /users/{user_id}**  
+**Path Parameters:**  
+- `user_id` (integer): The unique identifier of the user to update.  
 
-#### Exceptions:
-- `404 Not Found` if the compound does not exist.
+**Request Body:**  
+```json
+{
+  "username": "string",
+  "email": "string"
+}
+```  
+**Response:**  
+- Updated user details.  
 
----
+**Exceptions:**  
+- `404 Not Found`: If no user exists for the given `user_id`.  
+- `400 Bad Request`: If fields are invalid.  
 
-### 3. Simulation API
-**Path:** `/api/simulations/start`  
-**Method:** `POST`  
-**Description:** Initiates a mock AI analysis for a given compound.  
+### **DELETE /users/{user_id}**  
+**Path Parameters:**  
+- `user_id` (integer): The unique identifier of the user to delete.  
 
-#### Request Body Parameters:
-- `compound_id`: `UUID` (required) - The unique ID of the compound for simulation.
+**Response:**  
+- Confirmation of deletion.  
 
-#### Response Body:
-- `simulation_id`: `UUID` - Identifier for the initiated simulation.
-- `status`: `string` - Current simulation status.
-
-#### Exceptions:
-- `404 Not Found` if the compound ID is not valid.
-
----
-
-### 4. Report API
-**Path:** `/api/reports/download/{compound_id}`  
-**Method:** `GET`  
-**Description:** Downloads a PDF summary report for a specific compound.  
-
-#### Path Parameters:
-- `compound_id`: `UUID` - The unique identifier of the compound.
-
-#### Response Body:
-- **Binary PDF file** - The generated report file.
-
-#### Exceptions:
-- `404 Not Found` if the report for the compound does not exist.
+**Exceptions:**  
+- `404 Not Found`: If no user exists for the given `user_id`.  
 
 ---
 
-## Models
+## Media Files  
 
-### 1. User Model
-**Attributes:**
-- `user_id`: `UUID` - Primary Key.
-- `username`: `string` - Unique.
-- `password_hash`: `string`.
-- `created_at`: `TIMESTAMP`.
-- `last_login`: `TIMESTAMP`, nullable.
+### **GET /mediafiles/{media_id}**  
+**Path Parameters:**  
+- `media_id` (integer): The unique identifier of the media file.  
 
-### 2. Compound Model
-**Attributes:**
-- `compound_id`: `UUID` - Primary Key.
-- `user_id`: `UUID` - Foreign Key.
-- `chemical_structure`: `string`.
-- `upload_timestamp`: `TIMESTAMP`.
+**Response:**  
+- Returns media file details.  
 
-### 3. Simulation Model
-**Attributes:**
-- `simulation_id`: `UUID` - Primary Key.
-- `compound_id`: `UUID` - Foreign Key.
-- `simulation_result`: `JSON`.
-- `status`: `string`.
-- `created_at`: `TIMESTAMP`.
+**Exceptions:**  
+- `404 Not Found`: If no media exists for the given `media_id`.  
 
-### 4. Binding Affinity Model
-**Attributes:**
-- `binding_id`: `UUID` - Primary Key.
-- `simulation_id`: `UUID` - Foreign Key.
-- `before_affinity`: `float`.
-- `after_affinity`: `float`.
-- `created_at`: `TIMESTAMP`.
+### **POST /mediafiles**  
+**Request Body:**  
+- Multipart form-data including a file.  
 
-### 5. Repurposing Suggestion Model
-**Attributes:**
-- `suggestion_id`: `UUID` - Primary Key.
-- `compound_id`: `UUID` - Foreign Key.
-- `therapeutic_area`: `string`.
-- `suggestion_details`: `string`.
-- `created_at`: `TIMESTAMP`.
+**Response:**  
+- Media upload confirmation including `media_id`.  
 
-### 6. Report Model
-**Attributes:**
-- `report_id`: `UUID` - Primary Key.
-- `compound_id`: `UUID` - Foreign Key.
-- `content`: `BYTEA`.
-- `created_at`: `TIMESTAMP`.
+**Exceptions:**  
+- `400 Bad Request`: If file format is unsupported.  
 
----
+### **PUT /mediafiles/{media_id}**  
+**Path Parameters:**  
+- `media_id` (integer): The unique identifier of the media file to update.  
 
-## Schemas
+**Request Body:**  
+```json
+{
+  "file_name": "string",
+  "file_path": "string"
+}
+```  
+**Response:**  
+- Updated media file details.  
 
-### 1. User Schema
-**Properties:**
-- `username`: `string`.
-- `password`: `string` (only in request schema).
+**Exceptions:**  
+- `404 Not Found`: If no media exists for the given `media_id`.  
+- `400 Bad Request`: If fields are invalid.  
 
-### 2. Compound Schema
-**Properties:**
-- `chemical_structure`: `string`.
+### **DELETE /mediafiles/{media_id}**  
+**Path Parameters:**  
+- `media_id` (integer): The unique identifier of the media file to delete.  
+
+**Response:**  
+- Confirmation of deletion.  
+
+**Exceptions:**  
+- `404 Not Found`: If no media exists for the given `media_id`.  
 
 ---
 
-## CRUD Operations
+## Transcriptions  
 
-### 1. User CRUD
-**Operations:**
-- Create user
-- Retrieve user by ID
-- Retrieve user by username
+### **GET /transcriptions/{transcription_id}**  
+**Path Parameters:**  
+- `transcription_id` (integer): The unique identifier of the transcription.  
 
-### 2. Compound CRUD
-**Operations:**
-- Create compound
-- Retrieve compound by ID
-- List compounds by user
+**Response:**  
+- Returns transcription details.  
+
+**Exceptions:**  
+- `404 Not Found`: If no transcription exists for the given `transcription_id`.  
+
+### **POST /transcriptions**  
+**Request Body:**  
+```json
+{
+  "media_id": "integer",
+  "text": "string"
+}
+```  
+**Response:**  
+- Transcription creation confirmation including `transcription_id`.  
+
+**Exceptions:**  
+- `400 Bad Request`: If required fields are missing or invalid.  
+
+### **PUT /transcriptions/{transcription_id}**  
+**Path Parameters:**  
+- `transcription_id` (integer): The unique identifier of the transcription to update.  
+
+**Request Body:**  
+```json
+{
+  "text": "string"
+}
+```  
+**Response:**  
+- Updated transcription details.  
+
+**Exceptions:**  
+- `404 Not Found`: If no transcription exists for the given `transcription_id`.  
+- `400 Bad Request`: If fields are invalid.  
+
+### **DELETE /transcriptions/{transcription_id}**  
+**Path Parameters:**  
+- `transcription_id` (integer): The unique identifier of the transcription to delete.  
+
+**Response:**  
+- Confirmation of deletion.  
+
+**Exceptions:**  
+- `404 Not Found`: If no transcription exists for the given `transcription_id`.  
 
 ---
 
-## Services
+## Conclusion  
 
-### 1. AuthService
-**Responsibilities:**
-- Handle user authentication processes.
-- Generate JWT tokens.
-- Manage password hashing.
-
-### 2. CompoundService
-**Responsibilities:**
-- Logic for processing compound uploads.
-- Managing simulations.
-- Generating reports.
-
----
-
-## Utilities
-
-### 1. JWT Utility
-**Functions:**
-- Generate and verify JWT tokens.
-
-### 2. PDF Generator Utility
-**Functions:**
-- Convert simulation and compound data into downloadable PDF reports.
-
----
-
-## Conclusion
-This document provides a comprehensive blueprint for building the backend of the AI-Driven Drug Repurposing Platform. Each component and functionality is designed to ensure a robust, scalable, and maintainable system that aligns with both frontend requirements and overall project goals.
+This detailed documentation provides a comprehensive guide to implementing the backend for the Interactive Media Platform, outlining all necessary API endpoints, integrating components, and ensuring efficient data management across the system. This setup allows easy extensibility and integration with third-party services, enhancing interactive media experiences.
 

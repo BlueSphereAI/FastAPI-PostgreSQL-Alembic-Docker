@@ -1,34 +1,47 @@
-# Project Overview
+# Project Overview  
+The project is an **Interactive Media Platform** designed to enhance user engagement with audio content through a suite of interactive features. It aims to transform passive media consumption into an engaging experience by integrating functionalities such as:  
 
-The AI-Driven Drug Repurposing Platform POC aims to demonstrate the potential of utilizing artificial intelligence to optimize failed drug compounds, enhance binding affinities, and propose new applications within a short development timeframe. This proof of concept focuses on simulating the core capabilities of the platform by providing a user-friendly interface and comprehensive feature set that highlights the concept of using AI to generate insights for drug repurposing, showcasing its potential value to stakeholders.
+- **Media upload with automatic transcription**  
+- **Context-aware interactions**  
+- **Quizzes to reinforce learning**  
+- **CMS integration**  
+- **User feedback collection**  
 
-## Core Functionalities
+This platform will simulate AI-generated responses and interactions while demonstrating potential integrations with content management systems, all within an accessible front-end UI. The objective is to provide a vivid showcase of interactive media capabilities within a practical development timeframe.  
 
-### User Authentication & Dashboard Access
-- User login page to mimic authentication.
-- Dashboard display post-login to outline feature flow.
+---
 
-### Compound Upload Interface
-- Form for entering basic compound information such as chemical structure or SMILES notation.
-- Visual confirmation for successful compound upload.
+## Core Functionalities  
 
-### AI Simulation Preview
-- Placeholder animation to represent AI analysis process.
-- Mock result summary indicating simulation success.
+### Media Upload & Speech-to-Text Conversion  
+- Upload audio files in various formats (e.g., MP3).  
+- Automatic transcription of audio into text using a simulated speech-to-text engine.  
+- Synchronized playback of audio with displayed transcribed text.  
 
-### Binding Affinity Visualization
-- Static chart displaying hypothetical improvements in binding affinity.
-- Graph comparing 'Before' and 'After' AI analysis results.
+### Interactive Content Pausing & Context-Aware Inquiry  
+- Ability to pause audio playback at any point.  
+- Selection of predefined questions related to specific content segments.  
+- Display simulated AI-generated responses based on paused content.  
 
-### Repurposed Compound Suggestions
-- List of potential repurposing paths using sample data and placeholders.
-- Descriptions of possible therapeutic areas for compound repurposing.
+### Additional Engagement via Interactive Quizzes  
+- Presentation of quizzes at predetermined points during audio playback.  
+- Multiple-choice questions related to the content for user engagement.  
+- Immediate feedback on quiz responses, including correct answers and explanations.  
 
-### Download Summary Report
-- 'Download Report' button for generating a static PDF summary.
-- Report content includes compound information, simulation results, and repurposing options.
+### Demonstration of CMS Integration with Placeholder Data  
+- Simulated interface for potential CMS integration.  
+- Example data transfer and visualization to demonstrate integration capabilities.  
+- Display of mock media titles and descriptions fetched from a fictional CMS.  
 
-### User Interface Design
-- Emphasis on clear, user-friendly interfaces for ease of understanding.
-- Seamless transition between functions to enhance demonstration impact.
+### User Feedback Module  
+- Ability for users to provide feedback after using interactive features.  
+- Feedback collection on user experience and satisfaction, recorded for demonstration.  
 
+### Simulation & Placeholder Enhancements  
+- Precrafted questions and answer pairs to simulate real AI interactions.  
+- Use of sample data to illustrate CMS integration potential.  
+
+### Front-End Demonstration  
+- Cohesive UI showcasing all features in a single interface.  
+- Visual indicators for user interactions, including quizzes and feedback.  
+- Simulated integration feedback with visible user confirmation elements.  
