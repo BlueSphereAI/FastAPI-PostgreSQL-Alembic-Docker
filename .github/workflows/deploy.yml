@@ -1,0 +1,61 @@
+name: Deploy POC ${idea_id} (deepsphere.one)
+on:
+  push:
+    branches:
+      -  ${idea_id}
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    env: 
+      DOMAIN: ${{ vars.SSH_HOST }}
+      SSH_USERNAME: ${{ vars.SSH_USERNAME }}
+      SSH_KEY: ${{ secrets.SSH_KEY }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Delete specified files and directories on the remote server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ env.DOMAIN }}
+          username: ${{ env.SSH_USERNAME }}
+          key: ${{ env.SSH_KEY }}
+          script: |
+            rm -rf ./${idea_id }/nginx || true
+            rm -rf ./${idea_id }/docker-compose.dev.yml || true
+            rm -rf ./${idea_id }/db || true
+            rm -rf ./${idea_id }/backend || true
+            rm -rf ./${idea_id }/Makefile || true
+            rm -rf ./${idea_id }/cursor_dev || true
+            rm -rf ./${idea_id }/requirements || true
+            rm -rf ./${idea_id }/${idea_id}-v1.deepsphere.one || true
+            sudo rm -rf /etc/nginx/sites-available/${idea_id}-v1.deepsphere.one || true
+
+
+      - name: Copy source files to remote server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ env.DOMAIN }}
+          username: ${{ env.SSH_USERNAME }}
+          key: ${{ env.SSH_KEY }}
+          script: |
+            mkdir -p ./${idea_id }
+          source: "nginx, docker-compose.dev.yml, db, backend, Makefile, cursor_dev, requirements, ${idea_id}-v1.deepsphere.one"
+          target: "./${idea_id }/"
+
+
+      - name: Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ env.DOMAIN }}
+          username: ${{ env.SSH_USERNAME }}
+          key: ${{ env.SSH_KEY }}
+          script: |
+            sudo cp ./${idea_id }/${idea_id}-v1.deepsphere.one /etc/nginx/sites-available/
+            make stopBuildDevDocker
+            make runBuildDevDocker
+            sudo systemctl stop nginx
+            sudo certbot certonly --standalone -d ${idea_id }-v1.deepsphere.one
+            sudo systemctl start nginx

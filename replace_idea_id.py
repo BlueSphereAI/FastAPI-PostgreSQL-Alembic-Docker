@@ -71,7 +71,8 @@ def main():
     files = [
         'docker-compose.dev.yml',
         'nginx/nginx.conf',
-        '${idea_id}-v1.deepsphere.one'
+        '${idea_id}-v1.deepsphere.one',
+        '.github/workflows/deploy.yml'
     ]
     
     print(f"Replacing placeholders with idea_id: {idea_id}...")
