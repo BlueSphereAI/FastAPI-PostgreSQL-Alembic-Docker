@@ -29,6 +29,30 @@ def replace_idea_id(file_path, idea_id):
         print(f"Error processing file {file_path}: {str(e)}")
         return False
 
+def process_and_rename_file(file_path, idea_id):
+    """
+    Replace placeholders in a file and rename it if the filename contains ${idea_id}
+    """
+    # First replace content
+    if not replace_idea_id(file_path, idea_id):
+        return False
+    
+    # Check if filename contains the placeholder
+    if '${idea_id}' in file_path:
+        # Create new filename
+        new_file_path = file_path.replace('${idea_id}', str(idea_id))
+        
+        try:
+            # Rename the file
+            os.rename(file_path, new_file_path)
+            print(f"Renamed {file_path} to {new_file_path}")
+            return True
+        except Exception as e:
+            print(f"Error renaming file {file_path}: {str(e)}")
+            return False
+    
+    return True
+
 def main():
     # Check command line arguments
     if len(sys.argv) != 2:
@@ -46,17 +70,24 @@ def main():
     # Files to process
     files = [
         'docker-compose.dev.yml',
-        'nginx/nginx.conf'
+        'nginx/nginx.conf',
+        '${idea_id}-v1.deepsphere.one'
     ]
     
     print(f"Replacing placeholders with idea_id: {idea_id}...")
     
     # Process each file
     for file_path in files:
-        if replace_idea_id(file_path, idea_id):
-            print(f"Successfully processed {file_path}")
+        if '${idea_id}' in file_path:
+            if process_and_rename_file(file_path, idea_id):
+                print(f"Successfully processed and renamed {file_path}")
+            else:
+                print(f"Failed to process or rename {file_path}")
         else:
-            print(f"Failed to process {file_path}")
+            if replace_idea_id(file_path, idea_id):
+                print(f"Successfully processed {file_path}")
+            else:
+                print(f"Failed to process {file_path}")
 
 if __name__ == "__main__":
     main() 
