@@ -57,5 +57,5 @@ jobs:
             make stopBuildDevDocker
             make runBuildDevDocker
             sudo systemctl stop nginx
-            sudo certbot certonly --standalone -d ${idea_id }-v1.deepsphere.one
+            sudo certbot certonly --standalone -d ${idea_id}-v1.deepsphere.one
             sudo systemctl start nginx
