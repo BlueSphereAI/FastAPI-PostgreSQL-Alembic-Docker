@@ -1,38 +1,69 @@
-# AI-Driven Drug Repurposing Platform POC Specification
+# Startup Idea  
+A mobile app that helps users find and schedule appointments with local personal trainers based on their fitness goals and availability.  
 
-## Purpose
-The purpose of this POC is to demonstrate key functionalities of our AI-driven drug repurposing platform within a single day of development. The primary goal is to showcase the value of optimizing failed drug compounds using AI to enhance binding affinities and suggest potential new applications.
+## Features and Use Cases  
 
-## Key Features to Implement
+### **User Account Simulation**  
+**Functionality:**  
+Users can create a basic account to personalize searches and see their past bookings and feedback history.  
 
-### User Authentication & Dashboard Access
-- Display a simple login page to mimic user authentication.
-- After login, take users to a basic dashboard highlighting the feature flow.
+**Use Case:**  
+A user signs up using a simple form with just a name and mock email. The screen updates to show a welcome message and a dashboard with placeholders for **"My Bookings"** and **"Feedback History."**  
 
-### Compound Upload Interface
-- Provide a straightforward form for users to enter basic compound information such as chemical structure or SMILES notation.
-- Include a visual indicator (e.g., checkmark) to confirm successful upload.
+---  
 
-### AI Simulation Preview
-- Incorporate a placeholder animation (e.g., loading bar) to illustrate the AI analysis process.
-- Provide a mock result summary upon completion, indicating a successful 'simulation.'
+### **Trainer Profile Search**  
+**Functionality:**  
+Users can search for personal trainers by specialty, location, and hourly rate range.  
 
-### Binding Affinity Visualization
-- Display an easy-to-understand static chart demonstrating hypothetical improvements in binding affinity.
-- Use a simple graph comparing 'Before' and 'After' AI analysis to indicate potential enhancements.
+**Use Case:**  
+On the search screen, the user enters **"yoga,"** sets **"within 5 miles,"** and selects **"$30-$50 per hour."** The screen updates to display a list of matching trainer profiles, showing each trainer’s name, specialty, average rating, and price.  
 
-### Repurposed Compound Suggestions
-- Present a list of potential repurposing paths using sample data with simple placeholders (e.g., "Compound X may be used for Y").
-- Include brief descriptions of potential therapeutic areas for repurposing results.
+---  
 
-### Download Summary Report
-- Offer a 'Download Report' button that generates a static PDF summary of the simulated analysis.
-- The report should include compound info, simulated binding improvement, and potential repurposing options.
+### **View Trainer Details**  
+**Functionality:**  
+Users can select a trainer from the search results to view detailed information, including biography, certifications, hourly rates, and availability.  
 
-## Implementation Notes
-- Focus on clear and user-friendly interfaces to convey each function's purpose without backend processing.
-- Use static data and visual placeholders where needed to simulate complex computations convincingly.
-- Prioritize user experience and seamless transitions between steps to enhance demo impact.
+**Use Case:**  
+The user taps on a listed trainer. The trainer’s detailed profile appears with comprehensive information, including bio, certifications, hourly rate, and highlighted available time slots within a visually simulated schedule.  
 
-This POC aims to provide a high-level demonstration of the platform’s capabilities, promoting the core idea of using AI for drug repurposing insights. By focusing on key functionalities and using placeholders effectively, the demo will present the potential value to stakeholders convincingly.
+---  
 
+### **Schedule Appointment**  
+**Functionality:**  
+Users can schedule an appointment by picking from the trainer’s available time slots.  
+
+**Use Case:**  
+While viewing a trainer’s details, the user selects an available time slot and hits **"Book Appointment."** An on-screen confirmation appears, and the new appointment is simulated in the user’s **"My Bookings"** dashboard alongside placeholder previous bookings.  
+
+---  
+
+### **User Feedback Submission**  
+**Functionality:**  
+Post-session, users can rate their trainer and submit text feedback.  
+
+**Use Case:**  
+Upon appointment completion, the app prompts the user from their dashboard to rate the session. The user selects **5 stars** and adds a comment. Submission updates the trainer’s profile to reflect the aggregated rating score visible to other users.  
+
+---  
+
+### **Dynamic Trainer Availability Simulation**  
+**Functionality:**  
+Illustrate varying trainer availability with sample data that changes to reflect realistic shifts in schedule.  
+
+**Use Case:**  
+On accessing the trainer’s schedule, the user sees dynamically generated slots that change when the app refreshes daily, demonstrating variability in trainer availability for new users exploring the app.  
+
+---  
+
+### **Rating Visualization**  
+**Functionality:**  
+Reflect new ratings immediately on the trainer’s profile as feedback is submitted.  
+
+**Use Case:**  
+After a user submits feedback, they immediately return to the trainer’s profile to see the updated average star rating and latest review added to the profile's feedback section, enhancing transparency and reliability for new searches.  
+
+---  
+
+This revised POC specification showcases key functionalities that can be developed and demonstrated convincingly in one week, clearly illustrating how the app helps users find and connect with personal trainers efficiently and meet their fitness needs.  

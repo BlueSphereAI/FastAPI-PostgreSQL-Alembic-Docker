@@ -1,34 +1,38 @@
-# Project Overview
+# Project Overview  
+The project is a mobile app designed to help users find and schedule appointments with local personal trainers based on their fitness goals and availability. The app serves as a platform for users to personalize their trainer searches, manage bookings, and provide feedback, while allowing trainers to present their profiles and manage their schedules dynamically. It aims to efficiently connect users with personal trainers suited to their specific requirements, streamlining the process of achieving fitness goals through easy scheduling and feedback mechanisms.  
 
-The AI-Driven Drug Repurposing Platform POC aims to demonstrate the potential of utilizing artificial intelligence to optimize failed drug compounds, enhance binding affinities, and propose new applications within a short development timeframe. This proof of concept focuses on simulating the core capabilities of the platform by providing a user-friendly interface and comprehensive feature set that highlights the concept of using AI to generate insights for drug repurposing, showcasing its potential value to stakeholders.
+## Core Functionalities  
 
-## Core Functionalities
+### User Management  
+- Create user accounts with basic personal information.  
+- Provide personalized search results based on user preferences.  
+- Simulate user dashboard showcasing past bookings and feedback history.  
 
-### User Authentication & Dashboard Access
-- User login page to mimic authentication.
-- Dashboard display post-login to outline feature flow.
+### Trainer Search and Discovery  
+- Search for trainers based on specialties, location, and hourly rates.  
+- Filter search results for personalized and relevant trainer listings.  
+- Display a list of matching trainers with essential information such as name, specialty, rating, and price.  
 
-### Compound Upload Interface
-- Form for entering basic compound information such as chemical structure or SMILES notation.
-- Visual confirmation for successful compound upload.
+### Trainer Profile Management  
+- View detailed trainer profiles including biography, certifications, hourly rates, and schedule availability.  
+- Update and manage trainer information dynamically based on feedback and new data.  
 
-### AI Simulation Preview
-- Placeholder animation to represent AI analysis process.
-- Mock result summary indicating simulation success.
+### Appointment Scheduling  
+- Select from available time slots on a trainer's schedule.  
+- Book appointments directly through the app with confirmation notifications.  
+- Reflect new bookings on user dashboards with placeholders for previous and upcoming bookings.  
 
-### Binding Affinity Visualization
-- Static chart displaying hypothetical improvements in binding affinity.
-- Graph comparing 'Before' and 'After' AI analysis results.
+### User Feedback System  
+- Enable users to rate trainers post-session with star ratings and written feedback.  
+- Visualize immediate updates to trainer profiles with new ratings and feedback submissions.  
+- Aggregate and display feedback for transparency and trust-building among users.  
 
-### Repurposed Compound Suggestions
-- List of potential repurposing paths using sample data and placeholders.
-- Descriptions of possible therapeutic areas for compound repurposing.
+### Dynamic Availability Simulation  
+- Illustrate real-time changes in trainer availability with sample data.  
+- Refresh schedules daily to show variability in booking slots, enhancing the search experience.  
 
-### Download Summary Report
-- 'Download Report' button for generating a static PDF summary.
-- Report content includes compound information, simulation results, and repurposing options.
+### Rating and Review Visualization  
+- Implement instant update mechanisms for trainer ratings and reviews.  
+- Allow users to see the impact of their feedback on trainer profiles immediately.  
 
-### User Interface Design
-- Emphasis on clear, user-friendly interfaces for ease of understanding.
-- Seamless transition between functions to enhance demonstration impact.
-
+The project offers a comprehensive suite of functionalities that enhance user interaction, streamline the search for trainers, and provide dynamic scheduling options—all while maintaining a user-friendly interface.  
