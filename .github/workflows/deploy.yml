@@ -54,8 +54,8 @@ jobs:
           key: ${{ env.SSH_KEY }}
           script: |
             sudo cp ./${idea_id }/${idea_id}-v1.deepsphere.one /etc/nginx/sites-available/
-            make stopBuildDevDocker
-            make runBuildDevDocker
+            make ./${idea_id }/stopBuildDevDocker
+            make ./${idea_id }/runBuildDevDocker
             sudo systemctl stop nginx
             sudo certbot certonly --standalone -d ${idea_id}-v1.deepsphere.one
             sudo systemctl start nginx
